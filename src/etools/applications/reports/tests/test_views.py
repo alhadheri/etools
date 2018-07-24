@@ -4,7 +4,6 @@ from operator import itemgetter
 from django.core.urlresolvers import reverse
 from django.test import SimpleTestCase
 
-
 from rest_framework import status
 from tablib.core import Dataset
 
