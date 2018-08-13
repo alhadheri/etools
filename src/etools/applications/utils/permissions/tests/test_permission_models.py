@@ -23,9 +23,9 @@ class BasePermissionTestCase(TestCase):
         cls.user2 = UserFactory(username='user2')
         cls.user3 = UserFactory(username='user3')
 
-        cls.user1.groups = [group1]
-        cls.user2.groups = [group2]
-        cls.user3.groups = [group1, group2]
+        cls.user1.groups.set([group1])
+        cls.user2.groups.set([group2])
+        cls.user3.groups.set([group1, group2])
 
     def test_user_type_detection(self):
         class Permission(BasePermission):

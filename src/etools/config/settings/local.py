@@ -81,7 +81,7 @@ LOGGING['disable_existing_loggers'] = False  # don't disable any existing logger
 # enable tenant logging http://django-tenant-schemas.readthedocs.io/en/latest/use.html#logging
 LOGGING['filters'] = {
     'tenant_context': {
-        '()': 'tenant_schemas.log.TenantContextFilter'
+        '()': 'django_tenants.log.TenantContextFilter'
     }
 }
 LOGGING['formatters'] = {

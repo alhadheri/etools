@@ -4,8 +4,8 @@ from django.urls import resolve
 from django.db import connection
 
 from rest_framework.test import APIClient, APIRequestFactory, force_authenticate
-from tenant_schemas.test.cases import TenantTestCase
-from tenant_schemas.utils import get_tenant_model
+from django_tenants.test.cases import TenantTestCase
+from django_tenants.utils import get_tenant_model, get_tenant_domain_model
 from unicef_notification.models import EmailTemplate
 
 from etools.applications.users.models import WorkspaceCounter
@@ -17,7 +17,7 @@ SCHEMA_NAME = 'test'
 class BaseTenantTestCase(TenantTestCase):
     """
     Faster version of TenantTestCase.  (Based on FastTenantTestCase
-    provided by django-tenant-schemas.)
+    provided by django-tenant.)
     """
     client_class = APIClient
     maxDiff = None
@@ -42,7 +42,6 @@ class BaseTenantTestCase(TenantTestCase):
                 try:
                     call_command('loaddata', *cls.fixtures, **{
                                  'verbosity': 0,
-                                 'commit': False,
                                  'database': db_name,
                                  })
                 except Exception:
@@ -61,9 +60,9 @@ class BaseTenantTestCase(TenantTestCase):
 
         TenantModel = get_tenant_model()
         try:
-            cls.tenant = TenantModel.objects.get(domain_url=TENANT_DOMAIN, schema_name=SCHEMA_NAME)
+            cls.tenant = TenantModel.objects.get(schema_name=SCHEMA_NAME)
         except TenantModel.DoesNotExist:
-            cls.tenant = TenantModel(domain_url=TENANT_DOMAIN, schema_name=SCHEMA_NAME)
+            cls.tenant = TenantModel(schema_name=SCHEMA_NAME)
             cls.tenant.save(verbosity=0)
 
         cls.tenant.business_area_code = 'ZZZ'
@@ -85,6 +84,11 @@ class BaseTenantTestCase(TenantTestCase):
 
         # Load fixtures for tenant schema
         cls._load_fixtures()
+
+        tenant_domain = cls.get_test_tenant_domain()
+        cls.domain = get_tenant_domain_model()(tenant=cls.tenant, domain=tenant_domain)
+        cls.setup_domain(cls.domain)
+        cls.domain.save()
 
         try:
             cls.setUpTestData()

@@ -4,11 +4,11 @@
             "model": "partners.partnerorganization",
             "pk": 101,
             "fields": {
-                "created": "2018-08-08T17:43:36.137Z",
-                "modified": "2018-08-08T17:43:36.140Z",
+                "created": "2018-08-13T05:09:06.083Z",
+                "modified": "2018-08-13T05:09:06.087Z",
                 "partner_type": "Civil Society Organization",
                 "cso_type": "International",
-                "name": "Partner 8",
+                "name": "Partner 269",
                 "short_name": "Short name",
                 "description": "",
                 "shared_with": null,
@@ -86,13 +86,13 @@
     "partner_not_programmatic_visit_compliant": {
         "master": {
             "model": "partners.partnerorganization",
-            "pk": 1664,
+            "pk": 644,
             "fields": {
-                "created": "2018-08-08T17:43:36.142Z",
-                "modified": "2018-08-08T17:43:36.145Z",
+                "created": "2018-08-13T05:09:06.088Z",
+                "modified": "2018-08-13T05:09:06.091Z",
                 "partner_type": "",
                 "cso_type": null,
-                "name": "Partner 9",
+                "name": "Partner 270",
                 "short_name": "",
                 "description": "",
                 "shared_with": null,

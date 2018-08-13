@@ -16,6 +16,10 @@
         "x-frame-options": [
             "X-Frame-Options",
             "SAMEORIGIN"
+        ],
+        "content-length": [
+            "Content-Length",
+            "966"
         ]
     },
     "data": [
@@ -30,7 +34,7 @@
             "vendor_number": "DDD",
             "deleted_flag": false,
             "blocked": false,
-            "name": "Partner 8",
+            "name": "Partner 269",
             "short_name": "Short name",
             "partner_type": "Civil Society Organization",
             "cso_type": "International",
@@ -53,11 +57,11 @@
             "city": null,
             "postal_code": null,
             "country": null,
-            "id": 1664,
+            "id": 644,
             "vendor_number": null,
             "deleted_flag": false,
             "blocked": false,
-            "name": "Partner 9",
+            "name": "Partner 270",
             "short_name": "",
             "partner_type": "",
             "cso_type": null,

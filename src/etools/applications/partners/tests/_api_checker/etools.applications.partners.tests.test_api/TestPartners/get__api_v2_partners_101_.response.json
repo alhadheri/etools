@@ -16,6 +16,10 @@
         "x-frame-options": [
             "X-Frame-Options",
             "SAMEORIGIN"
+        ],
+        "content-length": [
+            "Content-Length",
+            "1472"
         ]
     },
     "data": {
@@ -78,11 +82,11 @@
             "expiring_assessment_flag": false,
             "approaching_threshold_flag": false
         },
-        "created": "2018-08-08T17:43:36.137000Z",
-        "modified": "2018-08-08T17:43:36.140000Z",
+        "created": "2018-08-13T05:09:06.083000Z",
+        "modified": "2018-08-13T05:09:06.087000Z",
         "partner_type": "Civil Society Organization",
         "cso_type": "International",
-        "name": "Partner 8",
+        "name": "Partner 269",
         "short_name": "Short name",
         "description": "",
         "shared_with": null,

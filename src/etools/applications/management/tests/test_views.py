@@ -2,7 +2,7 @@ from django.urls import reverse
 
 from mock import patch
 from rest_framework import status
-from tenant_schemas.test.client import TenantClient
+from django_tenants.test.client import TenantClient
 
 from etools.applications.EquiTrack.tests.cases import BaseTenantTestCase
 from unicef_locations.tests.factories import LocationFactory

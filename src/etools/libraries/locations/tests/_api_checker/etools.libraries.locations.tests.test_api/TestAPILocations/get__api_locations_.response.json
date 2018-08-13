@@ -7,7 +7,7 @@
         ],
         "etag": [
             "ETag",
-            "\"76ba84a50e0a4834ac2980aa3fe2754c\""
+            "\"bbbc016209c14b258c632f8fc75ca45b\""
         ],
         "cache-control": [
             "Cache-Control",
@@ -24,17 +24,21 @@
         "x-frame-options": [
             "X-Frame-Options",
             "SAMEORIGIN"
+        ],
+        "content-length": [
+            "Content-Length",
+            "184"
         ]
     },
     "data": [
         {
             "id": "101",
-            "name": "Location 0 [GatewayType 0 - abc]",
+            "name": "Location 0 [GatewayType 1 - abc]",
             "p_code": "abc",
             "gateway": {
-                "id": 2511,
-                "name": "GatewayType 0",
-                "admin_level": 0
+                "id": 2426,
+                "name": "GatewayType 1",
+                "admin_level": 1
             },
             "geo_point": "SRID=4326;POINT (20 20)",
             "parent": null

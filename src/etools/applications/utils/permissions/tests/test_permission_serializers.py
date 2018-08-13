@@ -18,8 +18,8 @@ class PermissionsBasedSerializerTestCase(TestCase):
         cls.user1 = UserFactory(username='user1')
         cls.user2 = UserFactory(username='user2')
 
-        cls.user1.groups = [group1]
-        cls.user2.groups = [group2]
+        cls.user1.groups.set([group1])
+        cls.user2.groups.set([group2])
 
         Permission.objects.bulk_create([
             Permission(user_type='Group1', permission='edit', target='parent.field'),

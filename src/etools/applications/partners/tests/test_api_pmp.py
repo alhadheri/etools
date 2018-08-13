@@ -5,7 +5,7 @@ from django.test import SimpleTestCase
 from django.urls import reverse
 
 from rest_framework import status
-from tenant_schemas.test.client import TenantClient
+from django_tenants.test.client import TenantClient
 
 from etools.applications.EquiTrack.fields import CURRENCY_LIST
 from etools.applications.EquiTrack.tests.cases import BaseTenantTestCase
