@@ -48,6 +48,7 @@ from etools.applications.audit.models import (
     UNICEFUser,
 )
 from etools.applications.audit.purchase_order.models import AuditorFirm, AuditorStaffMember, PurchaseOrder
+from etools.applications.audit.purchase_order.synchronizers import POSynchronizer
 from etools.applications.audit.serializers.auditor import (
     AuditorFirmExportSerializer,
     AuditorFirmLightSerializer,
@@ -87,7 +88,6 @@ from etools.applications.permissions2.conditions import ObjectStatusCondition
 from etools.applications.permissions2.drf_permissions import get_permission_for_targets, NestedPermission
 from etools.applications.permissions2.views import PermittedFSMActionMixin, PermittedSerializerMixin
 from etools.applications.utils.common.views import ExportViewSetDataMixin
-from etools.applications.vision.adapters.purchase_order import POSynchronizer
 
 
 class BaseAuditViewSet(
