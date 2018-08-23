@@ -18,9 +18,8 @@ from etools.applications.reports.models import (
     Disaggregation,
     DisaggregationValue,
     LowerResult,
-    ResultType,
     SpecialReportingRequirement,
-)
+    Result)
 from etools.applications.reports.serializers.v2 import DisaggregationSerializer
 from etools.applications.reports.tests.factories import (
     AppliedIndicatorFactory,
@@ -31,7 +30,6 @@ from etools.applications.reports.tests.factories import (
     IndicatorFactory,
     LowerResultFactory,
     ResultFactory,
-    ResultTypeFactory,
     SpecialReportingRequirementFactory,
 )
 from etools.applications.users.tests.factories import GroupFactory, UserFactory
@@ -54,10 +52,7 @@ class UrlsTestCase(URLAssertionMixin, SimpleTestCase):
 class TestReportViews(BaseTenantTestCase):
     @classmethod
     def setUpTestData(cls):
-        for name, _ in ResultType.NAME_CHOICES:
-            ResultTypeFactory(name=name)
         cls.user = UserFactory(is_staff=True)  # UNICEF staff user
-        cls.result_type = ResultType.objects.get(name=ResultType.OUTPUT)
 
         today = datetime.date.today()
         cls.country_programme = CountryProgrammeFactory(
@@ -66,18 +61,16 @@ class TestReportViews(BaseTenantTestCase):
             to_date=datetime.date(today.year + 1, 1, 1))
 
         cls.result1 = ResultFactory(
-            result_type=cls.result_type,
             country_programme=cls.country_programme,
         )
 
         cls.result2 = ResultFactory(
-            result_type=cls.result_type,
             country_programme=cls.country_programme
         )
         cls.v2_results_url = reverse('reports:report-result-list')
 
     def test_api_resulttypes_list(self):
-        url = reverse('resulttypes-list')
+        url = reverse('reports:report-result-type-list')
         response = self.forced_auth_req('get', url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -117,7 +110,6 @@ class TestOutputListAPIView(BaseTenantTestCase):
     @classmethod
     def setUpTestData(cls):
         cls.user = UserFactory(is_staff=True)  # UNICEF staff user
-        cls.result_type = ResultTypeFactory(name=ResultType.OUTPUT)
 
         today = datetime.date.today()
         cls.country_programme = CountryProgrammeFactory(
@@ -126,14 +118,13 @@ class TestOutputListAPIView(BaseTenantTestCase):
             to_date=datetime.date(today.year + 1, 1, 1))
 
         cls.result1 = ResultFactory(
-            result_type=cls.result_type,
             country_programme=cls.country_programme,
         )
 
         cls.result2 = ResultFactory(
-            result_type=cls.result_type,
             country_programme=cls.country_programme
         )
+        cls.result_type = Result.OUTPUT
         cls.url = reverse('reports:report-result-list')
 
     def test_get(self):
@@ -175,7 +166,7 @@ class TestOutputListAPIView(BaseTenantTestCase):
         )
 
     def test_filter_result_type(self):
-        data = {"result_type": self.result_type.name}
+        data = {"result_type": self.result_type}
         response = self.forced_auth_req('get', self.url, data=data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertCountEqual(
@@ -197,7 +188,7 @@ class TestOutputListAPIView(BaseTenantTestCase):
 
     def test_filter_combined(self):
         data = {
-            "result_type": self.result_type.name,
+            "result_type": self.result_type,
             "year": datetime.date.today().year,
         }
         response = self.forced_auth_req('get', self.url, data=data)
@@ -230,7 +221,6 @@ class TestOutputDetailAPIView(BaseTenantTestCase):
     @classmethod
     def setUpTestData(cls):
         cls.user = UserFactory(is_staff=True)  # UNICEF staff user
-        cls.result_type = ResultTypeFactory(name=ResultType.OUTPUT)
 
         today = datetime.date.today()
         cls.country_programme = CountryProgrammeFactory(
@@ -239,12 +229,10 @@ class TestOutputDetailAPIView(BaseTenantTestCase):
             to_date=datetime.date(today.year + 1, 1, 1))
 
         cls.result1 = ResultFactory(
-            result_type=cls.result_type,
             country_programme=cls.country_programme,
         )
 
         cls.result2 = ResultFactory(
-            result_type=cls.result_type,
             country_programme=cls.country_programme
         )
         cls.url = reverse('reports:report-result-detail', args=[cls.result1.pk])

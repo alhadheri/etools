@@ -16,7 +16,6 @@ from etools.applications.partners.tests.factories import (
     PartnerPlannedVisitsFactory,
     PartnerStaffFactory,
 )
-from etools.applications.reports.models import ResultType
 from etools.applications.reports.tests.factories import ResultFactory
 from etools.applications.users.tests.factories import UserFactory
 
@@ -81,8 +80,7 @@ class TestModelExport(BaseTenantTestCase):
         cls.ib = InterventionBudgetFactory(intervention=cls.intervention, currency="USD")
         cls.planned_visit = PartnerPlannedVisitsFactory(partner=cls.partner)
 
-        output_res_type, _ = ResultType.objects.get_or_create(name='Output')
-        cls.result = ResultFactory(result_type=output_res_type)
+        cls.result = ResultFactory(Result.OUTPUT)
 
     def test_intervention_export_api(self):
         response = self.forced_auth_req(

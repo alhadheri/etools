@@ -4,8 +4,7 @@ import json
 
 from etools.applications.EquiTrack.tests.cases import BaseTenantTestCase
 from etools.applications.reports.models import CountryProgramme, Indicator, Result, ResultType
-from etools.applications.reports.tests.factories import (CountryProgrammeFactory, IndicatorFactory,
-                                                         ResultFactory, ResultTypeFactory,)
+from etools.applications.reports.tests.factories import CountryProgrammeFactory, IndicatorFactory, ResultFactory
 from etools.applications.users.models import Country
 from etools.applications.vision.adapters import programme as adapter
 
@@ -13,9 +12,9 @@ from etools.applications.vision.adapters import programme as adapter
 class TestResultStructureSynchronizer(BaseTenantTestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.result_type_outcome = ResultTypeFactory(name=ResultType.OUTCOME)
-        cls.result_type_output = ResultTypeFactory(name=ResultType.OUTPUT)
-        cls.result_type_activity = ResultTypeFactory(name=ResultType.ACTIVITY)
+        cls.result_type_outcome = Result.OUTCOME
+        cls.result_type_output = Result.OUTPUT
+        cls.result_type_activity = Result.ACTIVITY
 
     def setUp(self):
         self.data = {"test": "123"}
@@ -571,7 +570,7 @@ class TestRAMSynchronizer(BaseTenantTestCase):
     @classmethod
     def setUpTestData(cls):
         cls.country = Country.objects.first()
-        cls.result_type_output = ResultTypeFactory(name=ResultType.OUTPUT)
+        cls.result_type_output = Result.OUTPUT
 
     def setUp(self):
         self.data = {

@@ -6,7 +6,7 @@ import logging
 from django.db import transaction
 
 
-from etools.applications.reports.models import CountryProgramme, Indicator, Result, ResultType
+from etools.applications.reports.models import CountryProgramme, Indicator, Result
 from etools.applications.vision.utils import wcf_json_date_as_date
 from etools.applications.vision.vision_data_synchronizer import VISION_NO_DATA_MESSAGE, VisionDataSynchronizer
 
@@ -69,12 +69,12 @@ class ResultStructureSynchronizer(object):
 
     def update_outcomes(self):
         remote_outcomes = self.data['outcomes']
-        outcome_type = ResultType.objects.get(name=ResultType.OUTCOME)
+        outcome_type = Result.OUTCOME
         total_data = len(remote_outcomes)
         total_updated = 0
 
         local_outcomes = dict([(r.wbs, r) for r in Result.objects.filter(wbs__in=list(remote_outcomes.keys()),
-                                                                         result_type__name=ResultType.OUTCOME
+                                                                         type=Result.OUTCOME
                                                                          )])
 
         for local_outcome in local_outcomes.values():
@@ -98,12 +98,12 @@ class ResultStructureSynchronizer(object):
 
     def update_outputs(self):
         rem_outputs = self.data['outputs']
-        output_type = ResultType.objects.get(name=ResultType.OUTPUT)
+        output_type = Result.OUTPUT
         total_data = len(rem_outputs)
         total_updated = 0
 
         loc_outputs = dict([(r.wbs, r) for r in Result.objects.filter(wbs__in=list(rem_outputs.keys()),
-                                                                      result_type__name=ResultType.OUTPUT)])
+                                                                      type__name=Result.OUTPUT)])
 
         for loc_output in loc_outputs.values():
             if self._update_changes(loc_output, rem_outputs[loc_output.wbs]):
@@ -127,12 +127,12 @@ class ResultStructureSynchronizer(object):
 
     def update_activities(self):
         rem_activities = self.data['activities']
-        activity_type = ResultType.objects.get(name=ResultType.ACTIVITY)
+        activity_type = Result.ACTIVITY
         total_data = len(rem_activities)
         total_updated = 0
 
         loc_activities = dict([(r.wbs, r) for r in Result.objects.filter(wbs__in=list(rem_activities.keys()),
-                                                                         result_type__name=ResultType.ACTIVITY)])
+                                                                         type__name=Result.ACTIVITY)])
 
         for loc_activity in loc_activities.values():
             if self._update_changes(loc_activity, rem_activities[loc_activity.wbs]):
