@@ -35,7 +35,6 @@ class CountryProgrammeFactory(factory.DjangoModelFactory):
     to_date = datetime.date(datetime.date.today().year, 12, 31)
 
 
-
 class ResultFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.Result

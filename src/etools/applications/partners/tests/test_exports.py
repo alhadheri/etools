@@ -16,6 +16,7 @@ from etools.applications.partners.tests.factories import (
     PartnerPlannedVisitsFactory,
     PartnerStaffFactory,
 )
+from etools.applications.reports.models import Result
 from etools.applications.reports.tests.factories import ResultFactory
 from etools.applications.users.tests.factories import UserFactory
 
